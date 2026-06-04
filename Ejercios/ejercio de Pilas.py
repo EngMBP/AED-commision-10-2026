@@ -20,7 +20,8 @@ class Pila:
         elemento = self._elementos.pop()
         print(f"se saca el elemento {elemento}")
         return elemento
-    def mostrar_datos(self):
+    #def mostrar_datos(self):
+        # completar el mostrar
         
 #===========
         
