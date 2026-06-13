@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modelo de Examen — Panadería La Campeona</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f4f6f9;
+      color: #222;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #b5451b, #e8722a);
+      color: white;
+      border-radius: 12px;
+      padding: 36px 40px;
+      margin-bottom: 32px;
+    }
+
+    header .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    header .subtitle {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    /* Section cards */
+    .section {
+      background: white;
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      background: #b5451b;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 20px;
+      padding: 3px 12px;
+      white-space: nowrap;
+    }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #444;
+      margin: 20px 0 10px;
+    }
+
+    p {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    /* Tip box */
+    .tip {
+      background: #fff8f0;
+      border-left: 4px solid #e8722a;
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #7a3a10;
+    }
+
+    .tip strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Ingredient / operation lists */
+    ul {
+      list-style: none;
+      margin: 10px 0;
+    }
+
+    ul li {
+      padding: 6px 0;
+      font-size: 15px;
+      color: #444;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    ul li:last-child { border-bottom: none; }
+
+    ul li::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #e8722a;
+      flex-shrink: 0;
+    }
+
+    /* Recipe block */
+    .recipe-block {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 14px 0;
+      font-size: 14px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .recipe-block .recipe-title {
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      color: #b5451b;
+      margin-bottom: 8px;
+    }
+
+    .recipe-block table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .recipe-block table td {
+      padding: 4px 8px;
+      color: #333;
+    }
+
+    .recipe-block table td:last-child {
+      text-align: right;
+      color: #888;
+    }
+
+    /* Weekly plan table */
+    table.plan {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 14px 0;
+    }
+
+    table.plan thead tr {
+      background: #f3f4f6;
+    }
+
+    table.plan th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: #555;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    table.plan td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #444;
+    }
+
+    table.plan tr:hover td { background: #faf9f8; }
+
+    .day-badge {
+      display: inline-block;
+      background: #fff0e8;
+      color: #b5451b;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 2px 9px;
+      border-radius: 10px;
+    }
+
+    /* Summary table */
+    table.summary {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 14px;
+    }
+
+    table.summary thead tr {
+      background: #b5451b;
+      color: white;
+    }
+
+    table.summary th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    table.summary td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #444;
+    }
+
+    table.summary tr:nth-child(even) td { background: #faf9f8; }
+
+    /* Concepts chips */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      background: #fff0e8;
+      color: #b5451b;
+      border: 1px solid #f5c5a3;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="label">Modelo de Examen · Programación en Python</div>
+    <h1>Panadería La Campeona</h1>
+    <div class="subtitle">Sistema de gestión de producción y compra de materias primas</div>
+  </header>
+
+  <!-- Contexto -->
+  <div class="section">
+    <div class="section-header">
+      <span class="badge">Contexto</span>
+      <h2>Descripción del Proyecto</h2>
+    </div>
+    <p>
+      Los dueños de la Panadería La Campeona solicitan un programa para gestionar su producción semanal.
+      El objetivo principal es <strong>prever con anticipación la compra de materias primas</strong>,
+      optimizando costos mediante compras en cantidad y facilitando la facturación de productos.
+    </p>
+  </div>
+
+  <!-- Módulo 1 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="badge">Módulo 1</span>
+      <h2>Gestión de Recetas</h2>
+    </div>
+    <p>
+      El cliente cuenta con un <strong>recetario digital en formato binario</strong> (no legible con bloc de notas).
+      El módulo debe permitir las siguientes operaciones:
+    </p>
+    <ul>
+      <li>Abrir archivos de recetas en formato binario</li>
+      <li>Leer y mostrar el contenido en pantalla</li>
+      <li>Editar recetas existentes</li>
+      <li>Crear nuevas recetas</li>
+      <li>Eliminar recetas</li>
+      <li>Guardar en el mismo formato binario</li>
+    </ul>
+
+    <div class="tip">
+      <strong>Ayuda del docente</strong>
+      Crear una parte del programa que gestione archivos binarios con las operaciones: abrir, leer, editar, crear y borrar.
+    </div>
+
+    <h3>Estructura conocida de una receta</h3>
+    <div class="recipe-block">
+      <div class="recipe-title">Medialunas · 24 unidades</div>
+      <table>
+        <tr><td>Harina</td><td>1000 g</td></tr>
+        <tr><td>Levadura</td><td>25 g</td></tr>
+        <tr><td>Sal</td><td>20 g</td></tr>
+        <tr><td>Azúcar</td><td>300 g</td></tr>
+        <tr><td>Manteca</td><td>1000 g</td></tr>
+        <tr><td>Huevos</td><td>300 g</td></tr>
+        <tr><td>Esencia de vainilla</td><td>2 g</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Módulo 2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="badge">Módulo 2</span>
+      <h2>Plan Semanal de Producción</h2>
+    </div>
+    <p>
+      El cliente carga semanalmente un archivo indicando qué productos va a producir cada día y en qué cantidad
+      (siempre en <strong>unidades totales</strong>). Este archivo debe estar en <strong>formato ASCII (texto plano)</strong>
+      para poder editarse manualmente si es necesario.
+    </p>
+
+    <h3>Ejemplo de plan semanal</h3>
+    <table class="plan">
+      <thead>
+        <tr><th>Día</th><th>Producto</th><th>Cantidad</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="day-badge">Lunes</span></td><td>Medialunas</td><td>240 unidades</td></tr>
+        <tr><td><span class="day-badge">Lunes</span></td><td>Pan</td><td>300 unidades</td></tr>
+        <tr><td><span class="day-badge">Martes</span></td><td>Medialunas</td><td>120 unidades</td></tr>
+        <tr><td><span class="day-badge">Martes</span></td><td>Pan</td><td>600 unidades</td></tr>
+        <tr><td><span class="day-badge">Miércoles</span></td><td>Medialunas</td><td>240 unidades</td></tr>
+        <tr><td><span class="day-badge">Miércoles</span></td><td>Pan</td><td>800 unidades</td></tr>
+      </tbody>
+    </table>
+
+    <p>El módulo debe permitir: <strong>crear, editar y leer</strong> este archivo.</p>
+  </div>
+
+  <!-- Módulo 3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="badge">Módulo 3</span>
+      <h2>Informe de Compras de Materias Primas</h2>
+    </div>
+    <p>
+      A partir del plan semanal y las recetas, el sistema debe calcular cuánto hay que comprar
+      de cada ingrediente durante la semana y mostrarlo en un informe dedicado dentro del menú.
+    </p>
+
+    <div class="tip">
+      <strong>Ayuda del docente</strong>
+      Multiplicar la cantidad de cada ingrediente de la receta por la cantidad total de unidades a producir
+      de esa receta. El resultado se guarda y se muestra en un informe con su propio espacio en el menú.
+    </div>
+  </div>
+
+  <!-- Módulo 4 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="badge">Módulo 4</span>
+      <h2>Ordenamiento de Recetas por Ingrediente</h2>
+    </div>
+    <p>
+      El sistema debe poder <strong>ordenar y mostrar en pantalla</strong> las recetas según
+      la cantidad de un tipo de ingrediente específico (de mayor a menor cantidad).
+    </p>
+  </div>
+
+  <!-- Consigna -->
+  <div class="section">
+    <div class="section-header">
+      <span class="badge">Consigna</span>
+      <h2>Requisitos del Programa</h2>
+    </div>
+    <p>
+      Desarrollar un programa en <strong>Python</strong> que cumpla con todos los requerimientos anteriores:
+    </p>
+    <ul>
+      <li>Descomponer el programa en sus partes fundamentales</li>
+      <li>Cada operación debe tener su opción en el menú principal y sus funciones específicas</li>
+    </ul>
+
+    <h3>Conceptos requeridos</h3>
+    <div class="chips">
+      <span class="chip">Objetos (POO)</span>
+      <span class="chip">Archivos binarios</span>
+      <span class="chip">Archivos de texto (ASCII)</span>
+      <span class="chip">Ordenamiento</span>
+      <span class="chip">Menú principal</span>
+      <span class="chip">Funciones</span>
+    </div>
+  </div>
+
+  <!-- Resumen -->
+  <div class="section">
+    <div class="section-header">
+      <span class="badge">Resumen</span>
+      <h2>Módulos del Sistema</h2>
+    </div>
+    <table class="summary">
+      <thead>
+        <tr><th>#</th><th>Módulo</th><th>Tipo de archivo</th><th>Operaciones</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Gestión de recetas</td><td>Binario</td><td>Crear, leer, editar, eliminar</td></tr>
+        <tr><td>2</td><td>Plan semanal de producción</td><td>ASCII (texto)</td><td>Crear, leer, editar</td></tr>
+        <tr><td>3</td><td>Informe de compras</td><td>—</td><td>Calcular y mostrar</td></tr>
+        <tr><td>4</td><td>Ordenamiento de recetas</td><td>—</td><td>Ordenar y mostrar en pantalla</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>Panadería La Campeona · Modelo de Examen · Programación en Python</footer>
+
+</div>
+</body>
+</html>
